@@ -1,11 +1,15 @@
+
+import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
+import TodoFilter from "./TodoFilter";
 
 const TodoContainer = () => {
     return (
         <div className="mt-10">
-            <div className="mb-5">
-                <button>Add todo</button>
-                <button>Filter</button>
+            <div className="mb-7 flex justify-between">
+               
+                <AddTodoModal />
+                <TodoFilter />
             </div>
             <div className="bg-primary-gradient shadow-md w-full h-full rounded-2xl p-2">
 
