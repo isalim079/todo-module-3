@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    todos: []
-}
+    todos: [],
+};
 
 const todoSlice = createSlice({
-    name: 'todo',
+    name: "todo",
     initialState,
-    reducers: {}
-})
+    reducers: {},
+});
 
-export default todoSlice.reducer
+export default todoSlice.reducer;
