@@ -16,7 +16,13 @@ const TodoCard = ({ id, title, description, isCompleted }: TTodoCardProps) => {
         <div className="flex justify-between  p-4 rounded-md shadow-md border-2 border-blue-950 font-semibold">
             <input type="checkbox" name="" id="" />
             <p className="flex items-center">{title}</p>
-            <p>{isCompleted ? "Done" : "Pending"}</p>
+            <p className="flex items-center">
+                {isCompleted ? (
+                    <p className="text-green-600">Done</p>
+                ) : (
+                    <p className="text-red-600">Pending</p>
+                )}
+            </p>
             <p className="flex items-center">{description}</p>
             <div className="space-x-4">
                 <Button
