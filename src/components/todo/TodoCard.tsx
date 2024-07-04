@@ -1,5 +1,7 @@
-import { removeTodo, toggleComplete } from "../../redux/features/todoSlice";
-import { useAppDispatch } from "../../redux/hook";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useUpdateTodoMutation } from "../../redux/api/api";
+import { removeTodo} from "../../redux/features/todoSlice";
+// import { useAppDispatch } from "../../redux/hook";
 import { Button } from "../ui/button";
 
 type TTodoCardProps = {
@@ -7,13 +9,40 @@ type TTodoCardProps = {
     title: string;
     description: string;
     isCompleted?: boolean;
+    priority: string;
 };
 
-const TodoCard = ({ id, title, description, isCompleted }: TTodoCardProps) => {
-    const dispatch = useAppDispatch();
+const TodoCard = ({
+
+    title,
+    description,
+   id,
+    isCompleted,
+    priority,
+}: TTodoCardProps) => {
+    // const dispatch = useAppDispatch();
+
+    const [updateTodo, {isLoading}] = useUpdateTodoMutation()
 
     const toggleState = () => {
-        dispatch(toggleComplete(id))
+
+       
+
+        // dispatch(toggleComplete(id));
+        // console.log(taskData);
+
+        const options = {
+            id: id,
+            data: {
+                title,
+                description,
+                priority,
+                isCompleted: !isCompleted
+            }
+        }
+
+updateTodo(options)
+
     };
 
     return (
@@ -24,18 +53,29 @@ const TodoCard = ({ id, title, description, isCompleted }: TTodoCardProps) => {
                 name="complete"
                 id="complete"
             />
-            <p className="flex items-center">{title}</p>
-            <p className="flex items-center">
+            <p className="flex-1 flex ml-3 items-center">{title}</p>
+            <p className="flex-1 flex items-center">
+                <span
+                    className={`size-3 ${
+                        priority === "high" ? "bg-red-400" : ""
+                    } 
+                    ${priority === "medium" ? "bg-yellow-400" : ""} 
+                    ${priority === "low" ? "bg-green-400" : ""} 
+                    rounded-full flex mr-2`}
+                ></span>
+                <span>{priority}</span>
+            </p>
+            <p className="flex items-center flex-1">
                 {isCompleted ? (
-                    <p className="text-green-600">Done</p>
+                    <span className="text-green-600">Done</span>
                 ) : (
-                    <p className="text-red-600">Pending</p>
+                    <span className="text-red-600">Pending</span>
                 )}
             </p>
-            <p className="flex items-center">{description}</p>
+            <p className="flex items-center flex-1">{description}</p>
             <div className="space-x-4">
                 <Button
-                    onClick={() => dispatch(removeTodo(id))}
+                    // onClick={() => dispatch(removeTodo(id))}
                     className="bg-red-600"
                 >
                     <svg
